@@ -61,6 +61,9 @@ IB_DESIGNABLE @interface TOSegmentedControl : UIControl
 /** Set the color of the thumb view. (Default is white) */
 @property (nonatomic, strong, null_resettable) IBInspectable UIColor *thumbColor;
 
+/** AW: Set the color of the thumb shadow view. (Default is white) */
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *thumbShadowColor;
+
 /** Set the color of the separator lines between each item. (Default is dark grey) */
 @property (nonatomic, strong, null_resettable) IBInspectable UIColor *separatorColor;
 

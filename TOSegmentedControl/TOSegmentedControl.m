@@ -138,7 +138,7 @@ static CGFloat const kTOSegmentedControlDirectionArrowAlpha = 0.4f;
 
     // Create thumb view
     self.thumbView = [[UIView alloc] initWithFrame:CGRectMake(2.0f, 2.0f, 100.0f, 28.0f)];
-    self.thumbView.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.thumbView.layer.shadowColor = [UIColor blackColor].CGColor;  // AW
     #ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) { self.thumbView.layer.cornerCurve = kCACornerCurveContinuous; }
     #endif
@@ -157,6 +157,7 @@ static CGFloat const kTOSegmentedControlDirectionArrowAlpha = 0.4f;
     self.itemColor = nil;
     self.textFont = nil;
     self.selectedTextFont = nil;
+    self.thumbShadowColor = nil;    // AW
 
     // Set default values
     self.selectedSegmentIndex = -1;
@@ -1260,6 +1261,8 @@ static CGFloat const kTOSegmentedControlDirectionArrowAlpha = 0.4f;
 
 - (void)setThumbShadowRadius:(CGFloat)thumbShadowRadius { self.thumbView.layer.shadowRadius = thumbShadowRadius; }
 - (CGFloat)thumbShadowRadius { return self.thumbView.layer.shadowRadius; }
+- (void)setThumbShadowColor: (UIColor)thumbShadowColor { self.thumbView.layer.shadowColor = thumbShadowColor; }
+- (UIColor)thumbShadowColor {return self.thumbView.layer.shadowColor; }
 
 // -----------------------------------------------
 // Number of segments
