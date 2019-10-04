@@ -1261,7 +1261,7 @@ static CGFloat const kTOSegmentedControlDirectionArrowAlpha = 0.4f;
 
 - (void)setThumbShadowRadius:(CGFloat)thumbShadowRadius { self.thumbView.layer.shadowRadius = thumbShadowRadius; }
 - (CGFloat)thumbShadowRadius { return self.thumbView.layer.shadowRadius; }
-- (void)setThumbShadowColor: (CGColorRef *)thumbShadowColor { self.thumbView.layer.shadowColor = thumbShadowColor; }
+- (void)setThumbShadowColor: (UIColor *)thumbShadowColor { self.thumbView.layer.shadowColor = thumbShadowColor.CGColor; }
 - (CGColorRef *)thumbShadowColor {return self.thumbView.layer.shadowColor; }
 
 // -----------------------------------------------
