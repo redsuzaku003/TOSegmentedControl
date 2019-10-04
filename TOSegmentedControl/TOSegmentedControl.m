@@ -1261,8 +1261,34 @@ static CGFloat const kTOSegmentedControlDirectionArrowAlpha = 0.4f;
 
 - (void)setThumbShadowRadius:(CGFloat)thumbShadowRadius { self.thumbView.layer.shadowRadius = thumbShadowRadius; }
 - (CGFloat)thumbShadowRadius { return self.thumbView.layer.shadowRadius; }
-- (void)setThumbShadowColor: (UIColor *)thumbShadowColor { self.thumbView.layer.shadowColor = thumbShadowColor.CGColor; }
-- (CGColorRef *)thumbShadowColor {return self.thumbView.layer.shadowColor; }
+- (void)setThumbShadowColor:(UIColor *)thumbShadowColor
+{
+    self.thumbView.layer.shadowColor = thumbShadowColor.CGColor;
+    if (self.thumbView.layer.shadowColor != nil) { return; }
+
+    // On iOS 12 and below, simply set the thumb view to be white
+    self.thumbView.layer.shadowColor = [UIColor whiteColor].CGColor;
+
+    // For iOS 13 and up, create a dynamic provider that will trigger a color change
+    #ifdef __IPHONE_13_0
+    if (@available(iOS 13.0, *)) {
+        // Create the provider block that will trigger each time the trait collection changes
+        id dynamicColorProvider = ^UIColor *(UITraitCollection *traitCollection) {
+            // Dark color
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return [UIColor colorWithRed:0.357f green:0.357f blue:0.376f alpha:1.0f];
+            }
+
+            // Default light color
+            return [UIColor whiteColor];
+        };
+
+        // Assign the dynamic color to the view
+        self.thumbView.layer.shadowColor = [UIColor colorWithDynamicProvider:dynamicColorProvider].CGColor;
+    }
+    #endif
+}
+- (UIColor *)thumbShadowColor {return [UIColor colorWithCGColor: self.thumbView.layer.shadowColor]; }
 
 // -----------------------------------------------
 // Number of segments
